@@ -16,5 +16,3 @@ app.listen(port, (req, res) => {
 })
 
 app.use('/posts', postRouter)
-
- app.use('/:slug', postRouter)

@@ -1,5 +1,9 @@
 const { json } = require('express')
 const posts = require('../db/db.js')
+//integrazione per bonus
+//method fs per leggere e modificare i file di sistema
+const fs = require('fs')
+
 
 const index = (req, res) => {
 
@@ -26,7 +30,27 @@ const show = (req, res) => {
      })
 }
 
+const store = (req, res) =>{
+    //Crea un nuovo oggetto all'interno del db
+    const post ={
+        title: req.body.name,
+        slug: req.body.slug,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags,
+    }
+    //aggiorna file db
+    fs.writeFileSync('./db/db.js',`module.exports = ${JSON.stringify(posts, null, 4)}`)
+
+    res.json({
+        data: posts,
+        status: 201,
+        counter: posts.lenght
+    })
+}
+
 module.exports = {
     index,
-    show
+    show,
+    store
 }
