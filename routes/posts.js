@@ -7,7 +7,7 @@ const postController = require('../controller/postController.js')
 //define all routes here
 
 //Post API
-router.get('/posts', postController.index)
+router.get('/', postController.index)
 
 //show only the single(selected resources)
 router.get('/:slug', postController.show)
